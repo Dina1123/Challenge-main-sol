@@ -1,0 +1,20 @@
+{
+    "name": "dina/challenge",
+    "require": {
+        "laravel/framework": "^8.83"
+    },
+    "require-dev": {
+        "fideloper/proxy": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dina\\Challenge\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dina1123",
+            "email": "dinaaehab@gmail.com"
+        }
+    ]
+}

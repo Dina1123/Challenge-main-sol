@@ -1,5 +1,5 @@
 # Use the official PHP image with PHP-FPM
-FROM php:8.0-fpm
+FROM php:8.1-fpm
 
 # Install system dependencies and PHP extensions
 RUN apt-get update && apt-get install -y \
