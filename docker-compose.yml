@@ -6,7 +6,7 @@ services:
     container_name: mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: 12345678
       MYSQL_DATABASE: bookapi
       MYSQL_USER: app
       MYSQL_PASSWORD: password
@@ -17,7 +17,7 @@ services:
 
   api:
     build:
-      context: ./API
+      context: ./api
       dockerfile: Dockerfile
     container_name: api
     restart: unless-stopped
@@ -27,7 +27,7 @@ services:
       DB_USERNAME: app
       DB_PASSWORD: password
     volumes:
-      - ./API:/var/www
+      - ./api:/var/www
     depends_on:
       - db
     expose:
@@ -35,12 +35,13 @@ services:
 
   client:
     build:
-      context: ./Client
+      context: ./client
       dockerfile: Dockerfile
     container_name: client
     restart: unless-stopped
+    # command: npm run start
     volumes:
-      - ./Client:/usr/src/app
+      - ./client:/usr/src/app
     expose:
       - 3000
 
@@ -51,12 +52,20 @@ services:
     ports:
       - "80:80"
       - "443:443"
+
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/nginx/certs
+      - ./client:/usr/src/app
+    
     depends_on:
       - client
       - api
+    
+    networks:
+      - app-network
 
 volumes:
   db_data:
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,5 +1,5 @@
 # Use the official Node.js image
-FROM node:18 AS build
+FROM node:18-alpine
 
 # Set working directory
 WORKDIR /usr/src/app
@@ -21,4 +21,4 @@ RUN npm run build
 EXPOSE 3000
 
 # Start the Nuxt.js application
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
